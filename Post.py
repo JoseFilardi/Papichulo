@@ -1,18 +1,25 @@
 class Post:
     
-    def __init__(self, likes, comentario, ):
+    def __init__(self, likes, editor, tipo, caption, fecha, etiquetas, multimedia):
         self.likes = likes
-        self.comentario = comentario
+        self.editor = editor
+        self.tipo = tipo 
+        self.caption = caption
+        self.fecha = fecha
+        self.etiquetas = etiquetas
+        self.multimedia = multimedia
         
     def show_post(self):
-        return f"""
-    Likes: {self.likes}
-    Comentario: {self.comentario}    
-    """
-    #def show_comentario(self):
-    #    return f"""
-    #Usuario: {self.user}
-    #Post: {self.post} 
-    #Comentario: {self.comentario}
-    #Fecha: {self.fecha}
-    #"""
+        print( f"""
+    Likes: {self.likes}   
+    Editor: {self.editor}
+    Tipo: {self.tipo}
+    Caption: {self.caption}
+    Fecha: {self.fecha}
+    Etiquetas:
+    """)
+        for etiqueta in self.etiquetas:
+            print(etiqueta)
+        
+        print(f"Multimedia: {self.multimedia.show_multimedia()}")
+            
