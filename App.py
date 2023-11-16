@@ -1,4 +1,5 @@
 import requests
+from validaciones import *
 from Estudiante import Estudiante
 from Profesor import Profesor
 from Post import Post
@@ -65,7 +66,7 @@ class App:
             self.list_post.append(post)
 
     def menu_user(self):
-        print("Hola usuario")
+        pass
     
     def menu_admin(self):
         pass
@@ -85,6 +86,7 @@ class App:
                 if admin.email == email:
                     if admin.user == username:
                         self.menu_user()
+                        break
 
             print("Error en el email o en el username, por favor verifique")  
     
@@ -93,32 +95,17 @@ class App:
         
         # Pedir información al usuario
         nombre = input("\nIngrese su nombre: ")
-        while not nombre.isalpha() or len(nombre) == 0:
-          print("Error!!! Dato Inválido.")
-          nombre = input("\nIngrese su nombre: ")
+        validar_letras(nombre)
 
         apellido = input("Ingrese su apellido: ")
-        while not apellido.isalpha() or len(apellido) == 0:
-          print("Error!!! Dato Inválido.")
-          apellido = input("\nIngrese su nombre: ")
+        validar_letras(apellido)
 
-        #Corregir validacion del correo, por favor quitar el while true wtf
-        while True:
-            email = input("Ingrese su correo electrónico: ")
-            if "@" in email:
-                dominio = email.split("@")
-                if not email.count("@") == 1 and not dominio[1]=="correo.unimet.edu.ve" :
-                    print("El correo electrónico no tiene el formato correcto.")
-                    break
-                else:
-                    print("El correo electrónico es válido.")
-                    break
-            else:
-                print("El correo electrónico no tiene el formato correcto.")
+        #Probar la Validacion
+        email = input("Ingrese su correo: ")
+        while validar_email(email) != 1:
+            email = input("Ingrese su correo: ")
 
         username = input("Ingrese su nombre de usuario: ")
-
-        # Corregir de aqui para abajo por favor, es un chiste JAJAJAJAJAJAJAJAJA
 
         # Mostrar opciones para Carrera o Departamento
         print("\nSeleccione una opción:")
