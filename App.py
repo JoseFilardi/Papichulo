@@ -47,16 +47,16 @@ class App:
     def api_post(self):
         link = "https://raw.githubusercontent.com/Algoritmos-y-Programacion-2223-3/api-proyecto/main/posts.json"
         responce = requests.get(link)
-        datos = responce.json()
+        datos2 = responce.json()
 
-        for dato in datos:
-            editor = dato["editor"]
-            tipo = dato["tipo"]
-            caption = dato["caption"]
-            fecha = dato["fecha"]
-            etiquetas = dato["etiquetas"]
-            tipo_multimedia = dato["multimedia"]["tipo"]
-            url = dato["multimedia"]["url"]
+        for dato2 in datos2:
+            editor = dato2["publisher"]
+            tipo = dato2["type"]
+            caption = dato2["caption"]
+            fecha = dato2["date"]
+            etiquetas = dato2["tags"]
+            tipo_multimedia = dato2["multimedia"]["type"]
+            url = dato2["multimedia"]["url"]
             like = 0
 
             multimedia = Multimedia(tipo_multimedia, url)
@@ -64,12 +64,29 @@ class App:
 
             self.list_post.append(post)
 
-        
+    def menu_user(self):
+        print("Hola usuario")
+    
+    def menu_admin(self):
+        pass
+
     def inicio_sesion(self):
         while True:
-            username = input("Ingrese su username: ")
             email = input("Ingrese su correo: ")
-            #Dirigir hacia un menu si no es admin y dirigir al menu de admin si es admin
+            username = input("Ingrese su username: ")
+            
+            for user in self.list_user:
+                if user.email == email:
+                    if user.username == username:
+                        self.menu_user()
+                        break
+            
+            for admin in self.list_admin:
+                if admin.email == email:
+                    if admin.user == username:
+                        self.menu_user()
+
+            print("Error en el email o en el username, por favor verifique")  
     
 
     def registrar_user(self):
@@ -129,6 +146,8 @@ class App:
 
     
     def login(self):
+        self.api_perfil()
+        self.api_post()
         while True:
             
             print("""       ===========================     
@@ -155,8 +174,8 @@ class App:
                 opcion = input("Ingrese el número correspondiente a la acción que desea realizar: ")
                 
             if opcion == "1":
-                self.inicio_sesion
+                self.inicio_sesion()
             elif opcion == "2":
-                self.registrar_user
+                self.registrar_user()
             elif opcion == "3":
                 break

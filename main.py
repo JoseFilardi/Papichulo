@@ -2,5 +2,5 @@ from App import App
 
 def main():
     app = App()
-    app.api()
+    app.login()
 main()
