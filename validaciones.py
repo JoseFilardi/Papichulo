@@ -15,6 +15,13 @@ def validar_email(email):
         print("El correo debe contener al menos un '@'.")
         return -1
 
+def validar_values_unique(email, username, id, list_user):
+    for user in list_user:
+        if user.email == email or user.username == username or user.id == id:
+            return False
+    
+    return True
+
 #Validar que un string solo contenga letras
 def validar_letras(string):
     while not string.isalpha() or len(string) == 0:
@@ -22,10 +29,5 @@ def validar_letras(string):
         string = input("\nIngrese su nombre: ")
 
 #Validar 
-def validar_option(num1, num2, option):
-    while (not option.isnumeric()) or (not int(option) in range(num1, num2+1)):
-        print("Opción no válida.")
-        option = input("\nIngrese la opcion: ")
-
 def validar_cedula(cedula):
     pass

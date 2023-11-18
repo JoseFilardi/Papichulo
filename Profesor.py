@@ -3,7 +3,6 @@ from User import User
 class Profesor(User):
     def __init__(self, id, firstname, lastname, username, email, departamento, seguidores, tipo):
         self.departamento = departamento
-        self.tipo = "Profesor"
         super().__init__(id, firstname, lastname, username, email, seguidores, tipo)
 
     def show_teacher(self):

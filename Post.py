@@ -1,7 +1,7 @@
 class Post:
     
     def __init__(self, likes, editor, tipo, caption, fecha, etiquetas, multimedia):
-        self.likes = likes
+        self.likes = []
         self.editor = editor
         self.tipo = tipo 
         self.caption = caption
@@ -11,7 +11,7 @@ class Post:
         
     def show_post(self):
         print( f"""
-    Likes: {self.likes}   
+    Likes: {len(self.likes)}   
     Editor: {self.editor}
     Tipo: {self.tipo}
     Caption: {self.caption}
