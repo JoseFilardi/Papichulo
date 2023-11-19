@@ -37,8 +37,19 @@ def login():
             print("=" * 20)  
             break
 
-def inicio():
-    pass
+def inicio(lista_user, list_user_sesio):
+    while True:
+        email = input("Ingrese su correo: ")
+        username = input("Ingrese su username: ")  
+            
+        for user in lista_user:
+            if user.email == email:
+                if user.username == username:
+                    list_user_sesio.append(user)
+                    menu_user()
+                    break
+
+            print("Error en el email o en el username, por favor verifique")
 def registrar_user():
     pass 
      

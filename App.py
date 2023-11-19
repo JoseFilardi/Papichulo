@@ -4,7 +4,7 @@ from Estudiante import Estudiante
 from Profesor import Profesor
 from Post import Post
 from Multimedia import Multimedia
-from menu import menu
+import Menu
 class App:
     
     def __init__(self):
@@ -73,28 +73,7 @@ class App:
 
             self.list_post.append(post)
 
-    def inicio_sesion(self):
-        while True:
-            email = input("Ingrese su correo: ")
-            username = input("Ingrese su username: ")
-            
-            for user in self.list_user:
-                if user.email == email:
-                    if user.username == username:
-                        self.user_sesion.append(user)
-                        self.menu_user()
-                        break
-            
-            for admin in self.list_admin:
-                if admin.email == email:
-                    if admin.user == username:
-                        self.user_sesion.append(admin)
-                        self.menu_admin()
-                        break
-
-            print("Error en el email o en el username, por favor verifique") 
-
-    def menu_admin():  
+    def menu_admin(self):  
         while True:
             print("\n")
             print(25*" " + "=" * 24)
@@ -138,7 +117,8 @@ class App:
                 #login()
                 pass
     
-    def menu_user():
+    def menu_user(self):
+
         while True:
             print("\n")
             print(26*" " + "=" * 18)
@@ -167,13 +147,45 @@ class App:
                         opcion = input("Ingrese el número correspondiente a la acción que desea realizar: ")
 
             if opcion == "1":
-                pass #self.perfil()
+                self.perfil()
             elif opcion == "2":
                 pass #self.multimedia()
             elif opcion == "3":        
                 pass #self.interaccion()
             else:
-                pass #login()
+                self.user_sesion = []
+                self.login()
+
+    def perfil(self):
+        if self.user_sesion[0].tipo == "Profesor":
+            self.user_sesion[0].show_teacher()
+        else:
+            self.user_sesion[0].show_student()
+        
+        #Mostrar en ambos casos la opcion de modificar datos y una opcion para salir, esa salida dirigira al usuario al menu_user
+
+        
+    
+    def inicio_sesion(self):
+        while True:
+            email = input("Ingrese su correo: ")
+            username = input("Ingrese su username: ")  
+
+            for user in self.list_user:
+                if user.email == email:
+                    if user.username == username:
+                        self.user_sesion.append(user)
+                        self.menu_user()
+                        break
+            
+            for admin in self.list_admin:
+                if admin.email == email:
+                    if admin.username == username:
+                        self.user_sesion.append(admin)
+                        self.menu_admin()
+                        break
+
+            print("Error en el email o en el username, por favor verifique")
     
     def registrar_user(self):
         
@@ -234,10 +246,14 @@ class App:
                 if estudiante.carrera == major:
                     list_seguidores.append(estudiante.id)
 
-            estudiante = Estudiante(cedula, nombre, apellido, email, username, major, list_seguidores, tipo="Estudiante")
+            estudiante = Estudiante(cedula, nombre, apellido,username, email, major, list_seguidores, tipo="Estudiante")
+            estudiante.show_student()
 
             self.list_estudiantes.append(estudiante)
             self.list_user.append(estudiante)
+            
+            for user in self.list_user:
+                user.show_user()
 
         else:
 
@@ -261,16 +277,11 @@ class App:
             self.list_profesores.append(profesor)
             self.list_user.append(profesor)
         
-        print("Usuario creado con exito.")
-
+        print("Usuario creado con exito.") 
+    
     
     def login(self):
-
         #Llenar datos iniciales a partir de la API
-        self.api_perfil()
-        self.api_post()
-        self.llenado_carreras()
-        self.llenado_department()
         while True:
             print("\n")
             print(23*" " + "=" * 27)
@@ -295,6 +306,7 @@ class App:
                 opcion = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
             if opcion == "1":
                 self.inicio_sesion()
+
             elif opcion == "2":
                 self.registrar_user()
             else:
