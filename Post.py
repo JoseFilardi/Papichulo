@@ -4,7 +4,7 @@ class Post:
         self.likes = []
         self.editor = editor
         self.tipo = tipo 
-        self.caption = caption
+        self.caption = []
         self.fecha = fecha
         self.etiquetas = etiquetas
         self.multimedia = multimedia
@@ -14,12 +14,14 @@ class Post:
     Likes: {len(self.likes)}   
     Editor: {self.editor}
     Tipo: {self.tipo}
-    Caption: {self.caption}
     Fecha: {self.fecha}
     Etiquetas:
     """)
         for etiqueta in self.etiquetas:
             print(etiqueta)
+        print("Caption: ")
         
+        for caption in self.caption:
+            print(caption)
         print(f"Multimedia: {self.multimedia.show_multimedia()}")
             

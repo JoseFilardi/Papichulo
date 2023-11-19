@@ -4,7 +4,7 @@ from Estudiante import Estudiante
 from Profesor import Profesor
 from Post import Post
 from Multimedia import Multimedia
-import Menu
+from Admin import Admin
 class App:
     
     def __init__(self):
@@ -15,8 +15,14 @@ class App:
         self.list_carreras = []
         self.list_departamento = []
         self.list_admin = []
+        self.list_admin.extend([
+            Admin("aguerra@unimet.edu.ve","Antonio24"),
+            Admin("jose.filardi@correo.unimet.edu.ve","Jose22")
+        ])
         self.user_sesion = []
 
+    #Cargar datos
+    #####################################################################################################
     def api_perfil(self):
         link="https://raw.githubusercontent.com/Algoritmos-y-Programacion-2223-3/api-proyecto/08d4d2ce028692d71e9f8c32ea8c29ae24efe5b1/users.json"
         responce = requests.get(link)
@@ -61,7 +67,8 @@ class App:
         for dato2 in datos2:
             editor = dato2["publisher"]
             tipo = dato2["type"]
-            caption = dato2["caption"]
+            caption = []
+            caption.append(dato2["caption"])
             fecha = dato2["date"]
             etiquetas = dato2["tags"]
             tipo_multimedia = dato2["multimedia"]["type"]
@@ -72,7 +79,9 @@ class App:
             post = Post(like, editor, tipo, caption, fecha, etiquetas, multimedia)
 
             self.list_post.append(post)
-
+    ####################################################################################################
+    
+    #Menu de admin
     def menu_admin(self):  
         while True:
             print("\n")
@@ -80,45 +89,124 @@ class App:
             print(25*" " + "|~|    MENU ADMIN    |~|")
             print(25*" " + "=" * 24)
             print("\n")
-            print(26*" " + "=" * 22)
-            print(26*" " + "|1|     Buscar     |1|") 
-            print(26*" " + "=" * 22)
-            print("")
             print(22*" " + "=" * 30)
-            print(22*" " + "|2|    Eliminar un Post    |2|")
+            print(22*" " + "|1|    Eliminar un Post    |1|")
             print(22*" " + "=" * 30)
             print(" ")
             print(20*" " + "=" * 34)
-            print(20*" " + "|3|   Eliminar un Comentario   |3|")
+            print(20*" " + "|2|   Eliminar un Comentario   |2|")
             print(20*" " + "=" * 34)
             print(" ")
             print(21*" " + "=" * 31)
-            print(21*" " + "|4|   Eliminar un Usuario   |4|")
+            print(21*" " + "|3|   Eliminar un Usuario   |3|")
             print(21*" " + "=" * 31)
             print(" ")
             print("=" * 20)
-            print("|5|     Salir    |5|")
+            print("|4|     Salir    |4|")
             print("=" * 20)
 
             opcion = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
-            while (not opcion.isnumeric()) or (not int(opcion) in range(1,6)):
+            while (not opcion.isnumeric()) or (not int(opcion) in range(1,5)):
                     print("Error!!! Dato Inválido.")
                     opcion = input("Ingrese el número correspondiente a la acción que desea realizar: ")        
             if opcion == "1":
-                #buscador()
-                pass
-            elif opcion == "2":
-                pass #self.eliminar_post()
-            elif opcion == "3":        
-                pass #self.eliminar_comen()
-            elif opcion == "4":
-                pass #self.eliminar_user()
+                self.eliminar_post()
+            elif opcion == "2":        
+                self.eliminar_comentario()
+            elif opcion == "3":
+                self.eliminar_user()
             else:
-                #login()
-                pass
+                self.login()
     
-    def menu_user(self):
+    #Eliminar Post
+    def eliminar_post(self):
+        #Mostrar todos los post
+        for i in range(0,len(self.list_post)):
+            print(f"{i+1}. {self.list_post[i].show_post()}")
+        
+        #Seleccionar post
+        option = input("Ingrese el numero del post que desea eliminar: ")
+        while (not option.isnumeric()) or (not int(option) in range(1,len(self.list_post))):
+            print("Error!!! Dato Inválido.")
+            option = input("Ingrese el numero del post que desea eliminar: ")
 
+        #Indice del post que se desea eliminar
+        index = int(option) - 1
+
+        #Eliminar post de la lista segun el indice
+        self.list_post.pop(index)
+
+        print("Post eliminado con exito.")
+    
+    #Eliminar comentario de un post
+    def eliminar_comentario(self):
+        #Mostrar todos los post
+        for i in range(0,len(self.list_post)):
+            print(f"{i+1}. {self.list_post[i].show_post()}")
+        
+        #Seleccionar post
+        option = input("Ingrese el numero del post que desea eliminar: ")
+        while (not option.isnumeric()) or (not int(option) in range(1,len(self.list_post))):
+            print("Error!!! Dato Inválido.")
+            option = input("Ingrese el numero del post que desea eliminar: ")
+        
+        index = int(option) - 1
+
+        #Guardar en una variable el post relacionado con el comentario que se desea elminar
+        post = self.list_post[index]
+
+        #Mostrar los comentarios del post seleccionado
+        for i in range(len(post.caption)):
+            print(f"{i+1}. {post.caption[i]}")
+
+        #Elegir el comentario del post seleccionado que dessea eliminar
+        option = input("Ingrese el numero del comentario que desea eliminar: ")
+        while (not option.isnumeric()) or (not int(option) in range(len(post.caption))):
+            print("Error!!! Dato Inválido.")
+            option = input("Ingrese el numero del comentario que desea eliminar: ")
+        
+        #Indice del comentario a eliminar
+        index_caption = int(option) - 1
+
+        #Eliminar el comentario por el indice
+        post.caption.pop(index_caption)
+
+        print("Comentario eliminado con exito")
+        
+    def eliminar_user(self):
+        #Mostrar los usuarios registrados
+        for i in range(0,len(self.list_user)):
+            if self.list_user[i].tipo == "Estudiante":
+                print(f"{i+1}. {self.list_post[i].show_student()}")
+            else:
+                print(f"{i+1}. {self.list_post[i].show_teacher()}")
+        
+        #Elegir el numero relacionado al usuario que se desea eliminar
+        option = input("Ingrese el numero del usuario que desea eliminar: ")
+        while (not option.isnumeric()) or (not int(option) in range(len(self.list_user))):
+            print("Error!!! Dato Inválido.")
+            option = input("Ingrese el numero del usuario que desea eliminar: ")
+        
+        index = int(option) - 1
+
+        if self.list_user[index].tipo == "Estudiante":
+            #Eliminar el estudiante de la lista de estudiantes
+            for i in range(len(self.list_estudiantes)):
+                if self.list_user[index].username == self.list_estudiantes[i].username:
+                    self.list_estudiantes.pop(i)
+                    break
+        else:
+            #Eliminar el profesor de la lista de profesores
+            for i in range(len(self.list_profesores)):
+                if self.list_user[index].username == self.list_profesores[i].username:
+                    self.list_profesores.pop(i)
+                    break
+        
+        #Por ultimo, elimino al usuario de la lista de usuario
+        self.list_user.pop(index)
+        print("Usuario eliminado")
+
+    def menu_user(self):
         while True:
             print("\n")
             print(26*" " + "=" * 18)
@@ -126,7 +214,7 @@ class App:
             print(26*" " + "=" * 18)
             print("\n")
             print(20*" " + "=" * 30)
-            print(20*" " + "|1|    Datos del Perfil    |1|") #self.perfil()
+            print(20*" " + "|1|        Perfil      |1|")
             print(20*" " + "=" * 30)
             print(" ")
             print(22*" " + "=" * 26)
@@ -134,7 +222,7 @@ class App:
             print(22*" " + "=" * 26)
             print(" ")
             print(22*" " + "=" * 26)
-            print(22*" " + "|3|     Interaccion     ||") 
+            print(22*" " + "|3|     Interaccion     |3|") 
             print(22*" " + "=" * 26) 
             print(" ")
             print("=" * 20)
@@ -157,15 +245,121 @@ class App:
                 self.login()
 
     def perfil(self):
+        while True:
+            print("\n")
+            print(24*" " + "=" * 26)
+            print(24*" " + "|~|    MENU  PERFIL    |~|")
+            print(24*" " + "=" * 26)
+            print("\n")
+            print(27*" " + "=" * 19)
+            print(27*" " + "|1|    Datos    |1|")
+            print(27*" " + "=" * 19) 
+            print(" ")
+            print(22*" " + "=" * 29)
+            print(22*" " + "|2|     Editar Perfil     |2|") 
+            print(22*" " + "=" * 29)
+            print(" ")
+            print(22*" " + "=" * 29)
+            print(22*" " + "|3|     Borrar Cuenta     |3|") 
+            print(22*" " + "=" * 29) 
+            print(" ")
+            print(22*" " + "=" * 29)
+            print(22*" " + "|4|    Volver al MENU     |4|")
+            print(22*" " + "=" * 29)
+
+            
+            opcion_perfil = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
+            while (not opcion_perfil.isnumeric()) or (not int(opcion_perfil) in range(1,5)):
+                        print("Error!!! Dato Inválido.")
+                        opcion_perfil = input("Ingrese el número correspondiente a la acción que desea realizar: ")
+            
+            if opcion_perfil == "1":
+                self.datos_perfil()
+            elif opcion_perfil == "2":
+                self.modificar_perfil()
+            elif opcion_perfil == "3":
+                self.borrar_cuenta()
+            else:
+                self.menu_user()
+ 
+    def datos_perfil(self):
         if self.user_sesion[0].tipo == "Profesor":
             self.user_sesion[0].show_teacher()
         else:
             self.user_sesion[0].show_student()
-        
-        #Mostrar en ambos casos la opcion de modificar datos y una opcion para salir, esa salida dirigira al usuario al menu_user
 
-        
+    def borrar_cuenta(self):
+        print("Y: yes, N: no")
+        option = input("Desea borrar su cuenta: ").upper()
+
+        if option == "Y":
+            #Eliminar de las sublistas depende del tipo
+
+            if self.user_sesion[0].tipo == "Estudiante":
+                #Eliminar de la lista de estudiantes
+                for i in range(len(self.list_estudiantes)):
+                    if self.list_estudiantes[i].username == self.user_sesion[0].username:
+                        self.list_estudiantes.pop(i)
+                        break
+            else:
+                #Eliminar de la lista de profesores
+                for i in range(len(self.list_profesores)):
+                    if self.list_profesores[i].username == self.user_sesion[0].username:
+                        self.list_profesores.pop(i)
+                        break
+            #Por utlimo, elimnar de la lista general de usuarios
+            for i in range(len(self.list_user)):
+                if self.list_user[i].username == self.user_sesion[0].username:
+                    self.list_user.pop(i)
+                    break
+            self.user_sesion.pop(0)
+            print("Cuenta Eliminada.\n")
+            self.login()
     
+
+    #Funcion para modificar el perfil
+    def  modificar_perfil(self):
+        print(27*" " + "=" * 19)
+        print(27*" " + "|*|    Datos    |*|")
+        print(27*" " + "=" * 19)
+        print(f"Nombre: {self.user_sesion[0].firstname}")
+        print(f"Apellido: {self.user_sesion[0].lastname}")
+        print(f"Email: {self.user_sesion[0].username}")
+        print(f"Username: {self.user_sesion[0].email}")
+        
+        while True:
+            print("\nOpciones de Modificacion:")
+            print("1. Modificar Nombre")
+            print("2. Modificar Apellido")
+            print("3. Modificar UserName")
+            print("4. Modificar Email")
+
+            option = input("Ingrese una opcion: ")
+            while (not option.isnumeric()) or (not int(option) in range(1,4)):
+                print("Error!!! Dato Inválido.")
+                option = input("Ingrese una opcion: ")
+            
+            if option == "1":
+                nombre = input("Ingrese el nuevo nombre: ")
+                validar_letras(nombre)
+                self.user_sesion[0].firstname = nombre
+
+            elif option == "2":
+                apellido = input("Ingrese el nuevo apellido: ")
+                validar_letras(apellido)
+                self.user_sesion[0].lastname = apellido
+            elif option == "3":
+                username = input("Ingrese el nuevo username: ")
+                validar_username_unique(username, self.list_user)
+                self.user_sesion[0].username = username
+            elif option == "4":
+                email = input("Ingrese el nuevo email: ")
+                validar_email_unique(email, self.list_user)
+                self.user_sesion[0].email = email
+            else:
+                break                
+
+
     def inicio_sesion(self):
         while True:
             email = input("Ingrese su correo: ")
@@ -251,9 +445,6 @@ class App:
 
             self.list_estudiantes.append(estudiante)
             self.list_user.append(estudiante)
-            
-            for user in self.list_user:
-                user.show_user()
 
         else:
 

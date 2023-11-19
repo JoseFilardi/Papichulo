@@ -1,60 +1,3 @@
-def login():
-    
-    while True:
-        print("\n")
-        print(23*" " + "=" * 27)
-        print(23*" " + "|~|  M E T R O G R A M  |~|")
-        print(23*" " + "=" * 27)
-        print("\n")    
-        print(20*" " + "=" * 33)
-        print(20*" " + "|1|      Inicio de Sesión     |1|")
-        print(20*" " + "=" * 33)
-        print(" ")
-        print(22*" " + "=" * 29)
-        print(22*" " + "|2|        Registro       |2|")
-        print(22*" " + "=" * 29)
-        print(" ")
-        print("=" * 20)
-        print("|3|     Salir    |3|")
-        print("=" * 20)   
-
-        opcion = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
-        while (not opcion.isnumeric()) or (not int(opcion) in range(1,4)):
-            print("Error!!! Dato Inválido.")
-            opcion = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
-
-        if opcion == "1":
-            pass
-            #self.inicio
-        elif opcion == "2":
-            pass
-            #self.registrar_user
-        else:
-            print("\n")
-            print("=" * 20)
-            print("|*|    ADIOS!!   |*|")
-            print("|*|   NOS VEMOS  |*|")
-            print("=" * 20)  
-            break
-
-def inicio(lista_user, list_user_sesio):
-    while True:
-        email = input("Ingrese su correo: ")
-        username = input("Ingrese su username: ")  
-            
-        for user in lista_user:
-            if user.email == email:
-                if user.username == username:
-                    list_user_sesio.append(user)
-                    menu_user()
-                    break
-
-            print("Error en el email o en el username, por favor verifique")
-def registrar_user():
-    pass 
-     
-     
-       
 def buscador():
     
     while True:
@@ -100,170 +43,6 @@ def buscar_user(): # Buscar perfiles en función de los siguientes filtros:a. Us
     pass       # Mostrar: a. Nombre y username b. Listado de publicaciones c. Es posible acceder a una publicación desde el listado del perfil
 
 
-        
-def admin():
-    
-    while True:
-        print("\n")
-        print(25*" " + "=" * 24)
-        print(25*" " + "|~|    MENU ADMIN    |~|")
-        print(25*" " + "=" * 24)
-        print("\n")
-        print(26*" " + "=" * 22)
-        print(26*" " + "|1|     Buscar     |1|") 
-        print(26*" " + "=" * 22)
-        print("")
-        print(22*" " + "=" * 30)
-        print(22*" " + "|2|    Eliminar un Post    |2|")
-        print(22*" " + "=" * 30)
-        print(" ")
-        print(20*" " + "=" * 34)
-        print(20*" " + "|3|   Eliminar un Comentario   |3|")
-        print(20*" " + "=" * 34)
-        print(" ")
-        print(21*" " + "=" * 31)
-        print(21*" " + "|4|   Eliminar un Usuario   |4|")
-        print(21*" " + "=" * 31)
-        print(" ")
-        print("=" * 20)
-        print("|5|     Salir    |5|")
-        print("=" * 20)
-
-        opcion = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
-        while (not opcion.isnumeric()) or (not int(opcion) in range(1,6)):
-                print("Error!!! Dato Inválido.")
-                opcion = input("Ingrese el número correspondiente a la acción que desea realizar: ")
-                
-        if opcion == "1":
-            buscador()
-        elif opcion == "2":
-            pass #self.eliminar_post()
-        elif opcion == "3":        
-            pass #self.eliminar_comen()
-        elif opcion == "4":
-            pass #self.eliminar_user()
-        elif opcion == "5":
-            login()
-
-def eliminar_post():
-    pass
-def eliminar_comen():
-    pass
-def eliminar_user():
-    pass
-
-
-
-def menu_user():
-    
-    while True:
-        print("\n")
-        print(26*" " + "=" * 18)
-        print(26*" " + "|~|    MENU    |~|")
-        print(26*" " + "=" * 18)
-        print("\n")
-        print(20*" " + "=" * 30)
-        print(20*" " + "|1|    Datos del Perfil    |1|") #self.perfil()
-        print(20*" " + "=" * 30)
-        print(" ")
-        print(22*" " + "=" * 26)
-        print(22*" " + "|2|     Multimedia     |2|") 
-        print(22*" " + "=" * 26)
-        print(" ")
-        print(22*" " + "=" * 26)
-        print(22*" " + "|3|     Interaccion     ||") 
-        print(22*" " + "=" * 26) 
-        print(" ")
-        print("=" * 20)
-        print("|4|     Salir    |4|")
-        print("=" * 20)
-
-        opcion = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
-        while (not opcion.isnumeric()) or (not int(opcion) in range(1,5)):
-                    print("Error!!! Dato Inválido.")
-                    opcion = input("Ingrese el número correspondiente a la acción que desea realizar: ")
-
-        if opcion == "1":
-            pass #self.perfil()
-        elif opcion == "2":
-            pass #self.multimedia()
-        elif opcion == "3":        
-            pass #self.interaccion()
-        elif opcion == "4":
-            login()
-
-def perfil(): #self.perfil()
-    
-    while True:
-        print("\n")
-        print(24*" " + "=" * 26)
-        print(24*" " + "|~|    MENU  PERFIL    |~|")
-        print(24*" " + "=" * 26)
-        print("\n")
-        print(27*" " + "=" * 19)
-        print(27*" " + "|1|    Datos    |1|")
-        print(27*" " + "=" * 19) 
-        print(" ")
-        print(22*" " + "=" * 29)
-        print(22*" " + "|2|     Editar Perfil     |2|") 
-        print(22*" " + "=" * 29)
-        print(" ")
-        print(22*" " + "=" * 29)
-        print(22*" " + "|3|     Borrar Cuenta     |3|") 
-        print(22*" " + "=" * 29) 
-        print(" ")
-        print(22*" " + "=" * 29)
-        print(22*" " + "|4|    Volver al MENU     |4|")
-        print(22*" " + "=" * 29)
-
-        
-        opcion_perfil = input("\nIngrese el número correspondiente a la acción que desea realizar: ")
-        while (not opcion_perfil.isnumeric()) or (not int(opcion_perfil) in range(1,5)):
-                    print("Error!!! Dato Inválido.")
-                    opcion_perfil = input("Ingrese el número correspondiente a la acción que desea realizar: ")
-
-        if opcion_perfil == "1":
-            pass #mostrar_datos_perfil()
-        elif opcion_perfil == "2":
-            pass #editar_perfil()
-        elif opcion_perfil == "3":
-            pass #borrar_cuenta() 
-        elif opcion_perfil == "4":
-            menu_user()
-
-def mostrar_datos_perfil():
-    pass
-    #print("\n")
-    #print(27*" " + "=" * 19)
-    #print(27*" " + "|*|    Datos    |*|")
-    #print(27*" " + "=" * 19)
-    
-    #print(f"Nombre: {nombre}")
-    #print(f"Apellido: {apellido}")
-    #print(f"Email: {email}")
-    #print(f"Username: {username}")
-    #print(f"Carrera: {carrera}"
-    #print(f"Departamento: {departamento})  
-def editar_perfil():
-    pass
-    #print(22*" " + "=" * 29)
-    #print(22*" " + "|*|     Editar Perfil     |*|") 
-    #print(22*" " + "=" * 29)
-
-    #nuevo_nombre = input("Nuevo Nombre: ")
-    #nuevo_apellido = input("Nuevo Apellido: ")
-    #nuevo_email = input("Nuevo Email: ")
-    #nuevo_username = input("Nuevo Username: ")
-    #nueva_carrera = input("Nueva Carrera: ")
-    #nueva_departamento = input("Nueva Departamento: ")  
-    #print("\n")
-    #print("=" * 32)
-    #print("|*|   ¡Perfil actualizado!   |*|")
-    #print("=" * 32)          
-def borrar_cuenta():
-    pass
-
-
 def multimedia():
     while True:
         print("\n")
@@ -300,7 +79,7 @@ def multimedia():
         elif opcion_muilti == "3":
             pass #ver_post(): 
         elif opcion_muilti == "4":
-            menu_user()
+            pass #menu_user()
 
 def registrar_post(username):
     print("\n")
@@ -391,7 +170,7 @@ def interaccion():
         elif opcion_inte == "5":
             pass #eliminar_comentario_ofensivo():
         elif opcion_inte == "6":
-            menu_user()
+            pass #menu_user()
 
 def seguir_usuario():
     pass#Cuando un usuario accede a la cuenta de otro usuario, se deberá mostrar la siguiente información:

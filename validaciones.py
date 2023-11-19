@@ -22,6 +22,20 @@ def validar_values_unique(email, username, id, list_user):
     
     return True
 
+def validar_email_unique(email, list_user):
+    for user in list_user:
+        if user.email == email:
+            return False
+    
+    return True
+
+def validar_username_unique(username, list_user):
+    for user in list_user:
+        if user.username == username:
+            return False
+    
+    return True
+
 #Validar que un string solo contenga letras
 def validar_letras(string):
     while not string.isalpha() or len(string) == 0:

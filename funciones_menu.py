@@ -1,18 +1,4 @@
-#LOGIN
-def inicio():
-    pass
-def registrar_user():
-    pass
- 
- 
-#ADMIN
-def eliminar_post(): 
-    pass      
-def eliminar_comen():
-    pass
-def eliminar_user():
-    pass
-
+#ADMIN  
 
 #BUSCADOR
 def buscar_post():
@@ -24,44 +10,9 @@ def buscar_user():
 
 
 #MENU USER 
-def perfil():
-    pass
 def multimedia():
     pass
 def interaccion():
-    pass
-
-#PERFIL // PARETE DEL MENU USER
-def mostrar_datos_perfil():
-    pass
-    #print("\n")
-    #print(27*" " + "=" * 19)
-    #print(27*" " + "|*|    Datos    |*|")
-    #print(27*" " + "=" * 19)
-    
-    #print(f"Nombre: {nombre}")
-    #print(f"Apellido: {apellido}")
-    #print(f"Email: {email}")
-    #print(f"Username: {username}")
-    #print(f"Carrera: {carrera}"
-    #print(f"Departamento: {departamento})      
-def editar_perfil():
-    pass
-    #print(22*" " + "=" * 29)
-    #print(22*" " + "|*|     Editar Perfil     |*|") 
-    #print(22*" " + "=" * 29)
-
-    #nuevo_nombre = input("Nuevo Nombre: ")
-    #nuevo_apellido = input("Nuevo Apellido: ")
-    #nuevo_email = input("Nuevo Email: ")
-    #nuevo_username = input("Nuevo Username: ")
-    #nueva_carrera = input("Nueva Carrera: ")
-    #nueva_departamento = input("Nueva Departamento: ")  
-    #print("\n")
-    #print("=" * 32)
-    #print("|*|   ¡Perfil actualizado!   |*|")
-    #print("=" * 32)           
-def borrar_cuenta():
     pass
 
 #MULTIMEDIA // PARETE DEL MENU USER
