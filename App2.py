@@ -660,15 +660,35 @@ class App2:
                         opcion = input("Ingrese el número correspondiente a la acción que desea realizar: ")
 
             if opcion == "1":
-                pass #self.buscar_post()
+                self.buscar_posts()
             elif opcion == "2":        
-                pass #self.buscar_comen()
+                self.buscar_comen()
             elif opcion == "3":
                 self.buscar_usuario()
             elif opcion == "4":
                 self.perfil()
                 
-    
+    def buscar_comen(self):
+        if not self.user_sesion:
+            print("Debe iniciar sesión para realizar esta acción.")
+            return
+
+        # Solicitar el username del usuario para buscar sus comentarios
+        username_buscar = input("Ingrese el username del usuario cuyos comentarios desea buscar: ")
+
+        # Iterar sobre los posts y mostrar aquellos que contengan comentarios del usuario buscado
+        for post in self.list_post:
+            if post.editor == username_buscar:
+                print("\nPost:")
+                post.show_post()
+
+                # Mostrar los comentarios del usuario buscado
+                if post.caption:
+                    print("Comentarios:")
+                    for comentario in post.caption:
+                        print(f" - {comentario}")
+
+        print("Búsqueda de comentarios completada.")
           
     def buscar_usuario(self):
         print("Seleccione el filtro de búsqueda:")
